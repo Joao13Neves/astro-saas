@@ -32,4 +32,31 @@
 
   --color-gradient-left-menu: linear-gradient(180deg, #f7f7f8 0%, #f0f1f7 100%);
   --color-gradient-select: linear-gradient(90deg, #f7f7f8 0%, #f0f1f7 100%);
+  --color-gradient-top-menu: linear-gradient(90deg, #f8f8f9 0%, #f0f1f7 100%);
+  --color-gradient-left-menu-dark: linear-gradient(
+    180deg,
+    #273241 0%,
+    #1e2734 100%
+  );
+  --color-gradient-select-dark: linear-gradient(
+    90deg,
+    #1e2734 0%,
+    #1a222e 100%
+  );
+  --color-gradient-top-menu-dark: linear-gradient(
+    90deg,
+    #273241 0%,
+    #303d4d 100%
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
 }

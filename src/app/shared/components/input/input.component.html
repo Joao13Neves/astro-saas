@@ -1,0 +1,14 @@
+<label [style.color]="this.labelColor" class="label" *ngIf="label"
+  >{{ label }}<span *ngIf="isRequired">*</span></label
+>
+<div class="input-container">
+  <input
+    name="{{ name }}"
+    [formControl]="formControl"
+    placeholder="{{ placeholder }}"
+  />
+</div>
+
+<div class="input-container-error">
+  <div class="validator-error" *ngIf="control"></div>
+</div>
