@@ -1,4 +1,4 @@
-<app-auth-form title="Login">
+<app-auth-form title="Recuperar senha">
   <form class="auth-fields" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <app-input
       label="Email"
@@ -16,19 +16,19 @@
       type="password"
       icon="lock"
       placeholder="Digite sua senha"
-      autocomplete="current-password"
+      autocomplete="new-password"
       [control]="form.controls.password"
     ></app-input>
 
-    <div class="auth-fields__row">
-      <app-checkbox
-        label="Lembrar"
-        name="remember"
-        [control]="form.controls.remember"
-      ></app-checkbox>
-
-      <a class="auth-link" routerLink="/login/esqueceu-senha">Esqueceu a senha?</a>
-    </div>
+    <app-input
+      label="Confirmação"
+      name="confirmation"
+      type="password"
+      icon="lock"
+      placeholder="Confirme sua senha"
+      autocomplete="new-password"
+      [control]="form.controls.confirmation"
+    ></app-input>
 
     <app-button type="submit">Entrar</app-button>
   </form>

@@ -50,6 +50,12 @@
   );
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -58,5 +64,12 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", "Roboto", sans-serif;
+  color: var(--color-secundary-black);
+  background: var(--color-background-white);
+}
+
+app-root {
+  display: block;
+  min-height: 100%;
 }
