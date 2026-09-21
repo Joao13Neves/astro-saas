@@ -1,14 +1,29 @@
 import { NgModule } from '@angular/core';
-import { LoginLayoutComponent } from '../features/login/pages/layout/layout.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { InputComponent } from './components/input/input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from './components/input/input.component';
+import { ButtonComponent } from './components/button/button.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
-  declarations: [LoginLayoutComponent, InputComponent],
-  exports: [LoginLayoutComponent, InputComponent],
+  declarations: [
+    InputComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    IconComponent,
+  ],
+  exports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    IconComponent,
+  ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  providers: [],
 })
 export class SharedModule {}
