@@ -1,1 +1,19 @@
-<p>esqueceu-senha.component works!</p>
+<app-auth-form
+  title="Esqueceu a senha?"
+  subtitle="Para recuperar sua senha, digite o seu email cadastrado."
+>
+  <form class="auth-fields" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <app-input
+      name="email"
+      type="email"
+      icon="email"
+      placeholder="Digite seu email"
+      autocomplete="email"
+      [control]="form.controls.email"
+    ></app-input>
+
+    <app-button type="submit">Recuperar</app-button>
+
+    <a class="auth-link auth-link--center" routerLink="/login">Retornar ao login</a>
+  </form>
+</app-auth-form>

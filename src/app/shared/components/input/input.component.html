@@ -1,14 +1,39 @@
-<label [style.color]="this.labelColor" class="label" *ngIf="label"
-  >{{ label }}<span *ngIf="isRequired">*</span></label
+<label
+  class="input-label"
+  [attr.for]="inputId"
+  [style.color]="labelColor || null"
+  *ngIf="label"
 >
-<div class="input-container">
+  {{ label }}<span class="input-label__required" *ngIf="isRequired">*</span>
+</label>
+
+<div
+  class="input-field"
+  [class.input-field--invalid]="control.touched && control.invalid"
+>
+  <app-icon class="input-field__icon" *ngIf="icon" [name]="icon"></app-icon>
+
   <input
-    name="{{ name }}"
-    [formControl]="formControl"
-    placeholder="{{ placeholder }}"
+    class="input-field__control"
+    [id]="inputId"
+    [name]="name"
+    [type]="resolvedType"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [attr.autocomplete]="autocomplete"
+    [class.input-field__control--with-icon]="!!icon"
+    [class.input-field__control--with-toggle]="type === 'password'"
   />
+
+  <button
+    class="input-field__toggle"
+    type="button"
+    *ngIf="type === 'password'"
+    [attr.aria-label]="toggleLabel"
+    (click)="togglePasswordVisibility()"
+  >
+    <app-icon [name]="toggleIcon"></app-icon>
+  </button>
 </div>
 
-<div class="input-container-error">
-  <div class="validator-error" *ngIf="control"></div>
-</div>
+<p class="input-error" *ngIf="errorMessage">{{ errorMessage }}</p>
