@@ -1,0 +1,8 @@
+<app-dashboard-widget title="Seus chamados recentes">
+  <app-table
+    [columns]="columns"
+    [rows]="tickets()"
+    idKey="id"
+    emptyMessage="Nenhum chamado encontrado."
+  ></app-table>
+</app-dashboard-widget>

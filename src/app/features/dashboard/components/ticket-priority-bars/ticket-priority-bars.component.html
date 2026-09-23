@@ -1,0 +1,16 @@
+<app-dashboard-widget title="Prioridade dos seus chamados">
+  <ul class="priority-bars">
+    @for (bar of bars(); track bar.priority) {
+      <li class="priority-bars__row">
+        <span class="priority-bars__label">{{ bar.label }}</span>
+        <span class="priority-bars__track">
+          <span
+            class="priority-bars__fill"
+            [style.width.%]="bar.percent"
+          ></span>
+        </span>
+        <span class="priority-bars__count">{{ bar.count }}</span>
+      </li>
+    }
+  </ul>
+</app-dashboard-widget>

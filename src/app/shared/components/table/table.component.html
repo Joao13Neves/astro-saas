@@ -1,0 +1,35 @@
+<div class="app-table-wrap">
+  <table class="app-table">
+    <thead>
+      <tr>
+        @for (column of columns(); track column.header) {
+          <th scope="col" [class.app-table__cell--truncate]="column.truncate">
+            {{ column.header }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of viewRows(); track row.id) {
+        <tr>
+          @for (cell of row.cells; track cell.header) {
+            <td
+              [class]="cell.cellClass"
+              [class.app-table__cell--truncate]="cell.truncate"
+              [class.app-table__cell--center]="cell.align === 'center'"
+              [class.app-table__cell--right]="cell.align === 'right'"
+            >
+              {{ cell.text }}
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td class="app-table__empty" [attr.colspan]="columns().length">
+            {{ emptyMessage() }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

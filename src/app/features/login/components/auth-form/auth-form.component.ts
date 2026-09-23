@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-auth-form',
-  standalone: false,
   templateUrl: './auth-form.component.html',
   styleUrl: './auth-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent {
-  @Input({ required: true }) title = '';
-  @Input() subtitle = '';
+  readonly title = input.required<string>();
+  readonly subtitle = input('');
 }

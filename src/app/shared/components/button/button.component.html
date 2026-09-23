@@ -1,8 +1,8 @@
 <button
   class="app-button"
-  [attr.type]="type"
-  [class.app-button--primary]="variant === 'primary'"
-  [disabled]="disabled"
+  [attr.type]="type()"
+  [class.app-button--primary]="variant() === 'primary'"
+  [disabled]="disabled()"
 >
   <ng-content></ng-content>
 </button>

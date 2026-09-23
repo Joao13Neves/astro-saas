@@ -1,0 +1,113 @@
+:host {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.analysis-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.analysis-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-secundary-gray-1);
+}
+
+.analysis-legend__swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.analysis-legend__swatch--tickets {
+  background: var(--color-secundary-green);
+}
+
+.analysis-legend__swatch--maintenances {
+  background: var(--color-primary-blue);
+}
+
+.analysis-chart {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 8px;
+  height: 230px;
+}
+
+.analysis-chart__axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.analysis-chart__plot {
+  position: relative;
+  min-width: 0;
+}
+
+.analysis-chart__grid {
+  position: absolute;
+  inset: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.analysis-chart__grid span {
+  display: block;
+  border-top: 1px solid var(--color-secundary-gray-4);
+}
+
+.analysis-chart__bars {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 22px;
+}
+
+.analysis-chart__group {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+}
+
+.analysis-chart__bar {
+  width: 7px;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+}
+
+.analysis-chart__bar--tickets {
+  background: var(--color-secundary-green);
+}
+
+.analysis-chart__bar--maintenances {
+  background: var(--color-primary-blue);
+}
+
+.analysis-chart__label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+}
