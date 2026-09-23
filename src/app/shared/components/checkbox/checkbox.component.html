@@ -1,11 +1,13 @@
-<label class="checkbox" [attr.for]="inputId">
+<label class="checkbox" [attr.for]="inputId()">
   <input
     class="checkbox__control"
     type="checkbox"
-    [id]="inputId"
-    [name]="name"
-    [formControl]="control"
+    [id]="inputId()"
+    [name]="name()"
+    [formControl]="control()"
   />
   <span class="checkbox__box" aria-hidden="true"></span>
-  <span class="checkbox__label" *ngIf="label">{{ label }}</span>
+  @if (label()) {
+    <span class="checkbox__label">{{ label() }}</span>
+  }
 </label>

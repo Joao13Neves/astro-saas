@@ -1,39 +1,48 @@
-<label
-  class="input-label"
-  [attr.for]="inputId"
-  [style.color]="labelColor || null"
-  *ngIf="label"
->
-  {{ label }}<span class="input-label__required" *ngIf="isRequired">*</span>
-</label>
+@if (label()) {
+  <label
+    class="input-label"
+    [attr.for]="inputId()"
+    [style.color]="labelColor() || null"
+  >
+    {{ label() }}
+    @if (isRequired()) {
+      <span class="input-label__required">*</span>
+    }
+  </label>
+}
 
 <div
   class="input-field"
-  [class.input-field--invalid]="control.touched && control.invalid"
+  [class.input-field--invalid]="control().touched && control().invalid"
 >
-  <app-icon class="input-field__icon" *ngIf="icon" [name]="icon"></app-icon>
+  @if (icon(); as iconName) {
+    <app-icon class="input-field__icon" [name]="iconName"></app-icon>
+  }
 
   <input
     class="input-field__control"
-    [id]="inputId"
-    [name]="name"
-    [type]="resolvedType"
-    [formControl]="control"
-    [placeholder]="placeholder"
-    [attr.autocomplete]="autocomplete"
-    [class.input-field__control--with-icon]="!!icon"
-    [class.input-field__control--with-toggle]="type === 'password'"
+    [id]="inputId()"
+    [name]="name()"
+    [type]="resolvedType()"
+    [formControl]="control()"
+    [placeholder]="placeholder()"
+    [attr.autocomplete]="autocomplete()"
+    [class.input-field__control--with-icon]="!!icon()"
+    [class.input-field__control--with-toggle]="type() === 'password'"
   />
 
-  <button
-    class="input-field__toggle"
-    type="button"
-    *ngIf="type === 'password'"
-    [attr.aria-label]="toggleLabel"
-    (click)="togglePasswordVisibility()"
-  >
-    <app-icon [name]="toggleIcon"></app-icon>
-  </button>
+  @if (type() === 'password') {
+    <button
+      class="input-field__toggle"
+      type="button"
+      [attr.aria-label]="toggleLabel()"
+      (click)="togglePasswordVisibility()"
+    >
+      <app-icon [name]="toggleIcon()"></app-icon>
+    </button>
+  }
 </div>
 
-<p class="input-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+@if (errorMessage(); as message) {
+  <p class="input-error">{{ message }}</p>
+}

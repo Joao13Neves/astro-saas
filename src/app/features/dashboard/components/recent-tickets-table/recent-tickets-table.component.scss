@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  flex: var(--dashboard-col-wide, 1.7) 1 0;
+  min-width: 0;
+
+  ::ng-deep .recent-tickets-cell--identity {
+    --app-table-cell-font-weight: 700;
+    --app-table-cell-color: var(--color-secundary-black);
+  }
+}

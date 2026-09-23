@@ -1,0 +1,18 @@
+<article class="dashboard-widget">
+  <header class="dashboard-widget__header">
+    <h2 class="dashboard-widget__title">{{ title() }}</h2>
+    <div class="dashboard-widget__actions">
+      <ng-content select="[widget-legend]"></ng-content>
+      <button
+        class="dashboard-widget__menu"
+        type="button"
+        aria-label="Mais opções"
+      >
+        <app-icon name="more" [size]="16"></app-icon>
+      </button>
+    </div>
+  </header>
+  <div class="dashboard-widget__body">
+    <ng-content></ng-content>
+  </div>
+</article>

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  width: 280px;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--color-background-white-light);
+}
+
+.search-field__icon {
+  color: var(--color-primary-blue);
+}
+
+.search-field__control {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-secundary-black);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-field__control::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-field__control::-webkit-search-cancel-button {
+  display: none;
+}

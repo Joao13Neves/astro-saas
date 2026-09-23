@@ -1,0 +1,26 @@
+@if (dashboard(); as data) {
+  <section class="dashboard-user">
+    <div class="dashboard-user__row">
+      <app-recent-tickets-table [tickets]="visibleTickets()"></app-recent-tickets-table>
+
+      @defer (on viewport) {
+        <app-ticket-priority-bars [items]="data.priorities"></app-ticket-priority-bars>
+      } @placeholder {
+        <div class="dashboard-user__placeholder dashboard-user__placeholder--narrow"></div>
+      }
+    </div>
+
+    <div class="dashboard-user__row">
+      @defer (on viewport) {
+        <app-ticket-stats-donut [stats]="data.stats"></app-ticket-stats-donut>
+      } @placeholder {
+        <div class="dashboard-user__placeholder dashboard-user__placeholder--narrow"></div>
+      }
+      @defer (on viewport) {
+        <app-tickets-maintenance-bars [series]="data.monthly"></app-tickets-maintenance-bars>
+      } @placeholder {
+        <div class="dashboard-user__placeholder dashboard-user__placeholder--wide"></div>
+      }
+    </div>
+  </section>
+}

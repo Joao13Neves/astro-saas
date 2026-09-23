@@ -1,0 +1,9 @@
+<header class="app-header">
+  <h1 class="app-header__greeting">
+    <span class="app-header__greeting-text">{{ greeting() }},</span>
+    <span class="app-header__username-text">{{ user().firstName }}</span>
+  </h1>
+
+  <app-search-field (queryChange)="onSearch($event)"></app-search-field>
+  <app-user-menu [user]="user()"></app-user-menu>
+</header>

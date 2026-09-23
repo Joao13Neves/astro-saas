@@ -1,0 +1,44 @@
+<app-dashboard-widget title="Análise dos chamados e manutenções">
+  <div widget-legend class="analysis-legend">
+    <span class="analysis-legend__item">
+      <i class="analysis-legend__swatch analysis-legend__swatch--tickets"></i>
+      Chamados
+    </span>
+    <span class="analysis-legend__item">
+      <i
+        class="analysis-legend__swatch analysis-legend__swatch--maintenances"
+      ></i>
+      Manutenções
+    </span>
+  </div>
+
+  <div class="analysis-chart">
+    <div class="analysis-chart__axis">
+      @for (tick of yTicks; track tick) {
+        <span>{{ tick }}</span>
+      }
+    </div>
+    <div class="analysis-chart__plot">
+      <div class="analysis-chart__grid" aria-hidden="true">
+        @for (tick of yTicks; track tick) {
+          <span></span>
+        }
+      </div>
+      <div class="analysis-chart__bars">
+        @for (bar of bars(); track bar.month) {
+          <div class="analysis-chart__group">
+            <span
+              class="analysis-chart__bar analysis-chart__bar--tickets"
+              [style.height.%]="bar.ticketsHeight"
+            ></span>
+            <span
+              class="analysis-chart__bar analysis-chart__bar--maintenances"
+              [style.height.%]="bar.maintenancesHeight"
+            ></span>
+            <span class="analysis-chart__label">{{ bar.month }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</app-dashboard-widget>

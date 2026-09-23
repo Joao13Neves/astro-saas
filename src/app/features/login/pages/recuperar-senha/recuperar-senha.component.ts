@@ -1,14 +1,28 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ResetPasswordFormControls } from '../../../../shared/models/auth.models';
 import { matchControlValueValidator } from '../../../../shared/validators/password-match.validator';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { InputComponent } from '../../../../shared/components/input/input.component';
+import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
 
 @Component({
   selector: 'app-recuperar-senha',
-  standalone: false,
+  imports: [
+    ReactiveFormsModule,
+    AuthFormComponent,
+    InputComponent,
+    ButtonComponent,
+  ],
   templateUrl: './recuperar-senha.component.html',
   styleUrl: './recuperar-senha.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecuperarSenhaComponent {
   private readonly fb = inject(NonNullableFormBuilder);
@@ -37,7 +51,6 @@ export class RecuperarSenhaComponent {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      return;
     }
   }
 }

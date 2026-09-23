@@ -1,0 +1,30 @@
+<aside class="sidebar">
+  <div class="sidebar__brand">
+    <span class="sidebar__logo" aria-hidden="true">
+      <img src="assets/img/logo.svg" alt="Logo tipo Astro" width="28" height="28" />
+    </span>
+    <div class="sidebar__brand-copy">
+      <p class="sidebar__brand-title">Astro</p>
+      <p class="sidebar__brand-subtitle">Suporte</p>
+    </div>
+  </div>
+
+  <div class="sidebar__nav">
+    @for (section of renderedSections(); track section.id) {
+      @if (section.label) {
+        <div class="sidebar__divider" aria-hidden="true"></div>
+        <p class="sidebar__label">{{ section.label }}</p>
+      }
+      <nav class="sidebar__list" [attr.aria-label]="section.label ?? 'Atalhos'">
+        @for (item of section.items; track item.id) {
+          <app-nav-item [item]="item" [badge]="item.badge"></app-nav-item>
+        }
+      </nav>
+    }
+  </div>
+
+  <button class="sidebar__logout" type="button" (click)="logout.emit()">
+    <app-icon class="sidebar__logout-icon" name="logout" [size]="18"></app-icon>
+    Sair
+  </button>
+</aside>
