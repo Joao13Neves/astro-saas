@@ -1,18 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox',
-  standalone: false,
+  imports: [ReactiveFormsModule],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent {
-  @Input() label = '';
-  @Input() name = '';
-  @Input({ required: true }) control!: FormControl<boolean>;
+  readonly label = input('');
+  readonly name = input('');
+  readonly control = input.required<FormControl<boolean>>();
 
-  get inputId(): string {
-    return this.name || 'app-checkbox';
-  }
+  readonly inputId = computed(() => this.name() || 'app-checkbox');
 }

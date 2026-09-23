@@ -1,0 +1,9 @@
+<label class="search-field">
+  <app-icon class="search-field__icon" name="search" [size]="18"></app-icon>
+  <input
+    class="search-field__control"
+    type="search"
+    [placeholder]="placeholder()"
+    (input)="onInput($event)"
+  />
+</label>

@@ -1,24 +1,33 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import {
   AuthBrandPosition,
   AuthRouteData,
 } from '../../../../shared/models/auth.models';
+import { AuthBrandComponent } from '../../components/auth-brand/auth-brand.component';
 
 @Component({
   selector: 'app-login-layout',
-  standalone: false,
+  imports: [RouterOutlet, AuthBrandComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginLayoutComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
-  brandPosition: AuthBrandPosition = 'left';
+  readonly brandPosition = signal<AuthBrandPosition>('left');
 
   constructor() {
     this.router.events
@@ -40,6 +49,6 @@ export class LoginLayoutComponent implements OnInit {
       | Partial<AuthRouteData>
       | undefined;
 
-    this.brandPosition = data?.brandPosition ?? 'left';
+    this.brandPosition.set(data?.brandPosition ?? 'left');
   }
 }

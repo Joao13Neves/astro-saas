@@ -6,6 +6,15 @@ export interface AuthRouteData {
   readonly brandPosition: AuthBrandPosition;
 }
 
+export interface AuthUser {
+  readonly id: string;
+  readonly name: string;
+  readonly firstName: string;
+  readonly roleLabel: string;
+  readonly email: string;
+  readonly avatarUrl: string | null;
+}
+
 export interface LoginFormValue {
   email: string;
   password: string;
@@ -36,4 +45,13 @@ export interface ResetPasswordFormControls {
   email: FormControl<string>;
   password: FormControl<string>;
   confirmation: FormControl<string>;
+}
+
+export interface AuthUser {
+  readonly id: string;
+  readonly name: string;
+  readonly firstName: string;
+  readonly roleLabel: string;
+  readonly email: string;
+  readonly avatarUrl: string | null;
 }

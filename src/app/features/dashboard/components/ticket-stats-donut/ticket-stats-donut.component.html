@@ -1,0 +1,46 @@
+<app-dashboard-widget title="Estatísticas dos seus chamados">
+  <div class="stats-donut">
+    <div class="stats-donut__chart">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle
+          cx="60"
+          cy="60"
+          r="48"
+          fill="none"
+          stroke="var(--color-secundary-gray-4)"
+          stroke-width="16"
+        />
+        @for (ring of rings(); track ring.id) {
+          <circle
+            cx="60"
+            cy="60"
+            r="48"
+            fill="none"
+            stroke-width="16"
+            stroke-linecap="butt"
+            transform="rotate(-90 60 60)"
+            [attr.stroke]="ring.color"
+            [attr.stroke-dasharray]="ring.dashArray"
+            [attr.stroke-dashoffset]="ring.dashOffset"
+          />
+        }
+      </svg>
+      <div class="stats-donut__center">
+        <strong>{{ stats().total }}</strong>
+        <span>Chamados</span>
+      </div>
+    </div>
+
+    <ul class="stats-donut__legend">
+      @for (item of stats().items; track item.status) {
+        <li>
+          <span class="stats-donut__legend-label">{{ item.label }}</span>
+          <div class="stats-donut__legend-value">
+            <span class="stats-donut__dot" [style.background]="item.color"></span>
+            <strong>{{ item.count }}</strong>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</app-dashboard-widget>

@@ -1,4 +1,17 @@
-export type AppIconName = 'email' | 'lock' | 'eye' | 'eye-off';
+export type AppIconName =
+  | 'email'
+  | 'lock'
+  | 'eye'
+  | 'eye-off'
+  | 'bell'
+  | 'ticket'
+  | 'dashboard'
+  | 'wrench'
+  | 'logout'
+  | 'search'
+  | 'chevron-down'
+  | 'more'
+  | 'user';
 
 export type AppInputType = 'text' | 'email' | 'password';
 

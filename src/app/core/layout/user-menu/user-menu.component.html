@@ -1,0 +1,14 @@
+<div class="user-menu">
+  <span class="user-menu__avatar" aria-hidden="true">
+    @if (user().avatarUrl; as avatarUrl) {
+      <img [src]="avatarUrl" [alt]="user().name" />
+    } @else {
+      <app-icon name="user" [size]="18"></app-icon>
+    }
+  </span>
+  <span class="user-menu__copy">
+    <span class="user-menu__name">{{ user().name }}</span>
+    <span class="user-menu__role">{{ user().roleLabel }}</span>
+  </span>
+  <app-icon class="user-menu__chevron" name="chevron-down" [size]="16"></app-icon>
+</div>
