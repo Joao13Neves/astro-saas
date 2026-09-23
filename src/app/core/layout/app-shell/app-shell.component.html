@@ -1,0 +1,16 @@
+<div class="app-shell">
+  @if (user(); as currentUser) {
+    <app-sidebar
+      [sections]="sections"
+      [badges]="badges()"
+      (logout)="onLogout()"
+    ></app-sidebar>
+
+    <div class="app-shell__main">
+      <app-header [user]="currentUser"></app-header>
+      <main class="app-shell__content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  }
+</div>

@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { EsqueceuSenhaComponent } from './pages/esqueceu-senha.component/esqueceu-senha.component';
-import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
-import { LoginLayoutComponent } from './pages/layout/layout.component';
+import { Routes } from '@angular/router';
 import { AuthRouteData } from '../../shared/models/auth.models';
+import { EsqueceuSenhaComponent } from './pages/esqueceu-senha.component/esqueceu-senha.component';
+import { LoginLayoutComponent } from './pages/layout/layout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 
-const routes: Routes = [
+export const LOGIN_ROUTES: Routes = [
   {
     path: '',
     component: LoginLayoutComponent,
@@ -29,9 +28,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class LoginRoutingModule {}

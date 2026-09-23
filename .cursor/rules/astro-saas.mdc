@@ -1,0 +1,40 @@
+---
+description: Padrões obrigatórios do Astro SaaS (Standalone, tipagem, Figma)
+alwaysApply: true
+---
+
+# Astro SaaS — regras do agent
+
+Antes de implementar, leia e siga `src/docs/` nesta ordem:
+
+1. `src/docs/README.md`
+2. `src/docs/arquitetura-standalone.md`
+3. `src/docs/padroes-codigo.md`
+4. `src/docs/componentizacao.md`
+5. `src/docs/performance.md`
+6. `src/docs/ui-e-figma.md`
+
+## Não negociável
+
+- Projeto 100% Angular Standalone. Nunca criar `NgModule`.
+- `ChangeDetectionStrategy.OnPush` em todo componente.
+- APIs novas: `input()`, `output()`, `computed()`, `inject()`, `@if` / `@for` / `@switch`.
+- Sem `any`. Models tipados. Sem duplicar funções ou markup.
+- UI fiel ao Figma; cores só via tokens CSS.
+- Português só no texto de UI. Código em inglês.
+
+```ts
+// ❌ BAD
+@NgModule({ declarations: [FooComponent] })
+export class FooModule {}
+
+// ✅ GOOD
+@Component({
+  selector: 'app-foo',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink],
+})
+export class FooComponent {
+  readonly title = input.required<string>();
+}
+```

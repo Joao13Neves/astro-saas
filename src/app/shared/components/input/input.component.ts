@@ -1,77 +1,100 @@
-import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+  signal,
+} from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { merge } from 'rxjs';
 import { AppIconName, AppInputType } from '../../models/ui.models';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-input',
-  standalone: false,
+  imports: [ReactiveFormsModule, IconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
-  @Input() label = '';
-  @Input() labelColor = '';
-  @Input() isRequired = false;
-  @Input() name = '';
-  @Input({ required: true }) control!: FormControl<string>;
-  @Input() placeholder = '';
-  @Input() type: AppInputType = 'text';
-  @Input() icon: AppIconName | null = null;
-  @Input() autocomplete = 'off';
+  readonly label = input('');
+  readonly labelColor = input('');
+  readonly isRequired = input(false);
+  readonly name = input('');
+  readonly control = input.required<FormControl<string>>();
+  readonly placeholder = input('');
+  readonly type = input<AppInputType>('text');
+  readonly icon = input<AppIconName | null>(null);
+  readonly autocomplete = input('off');
 
-  isPasswordVisible = false;
+  readonly isPasswordVisible = signal(false);
+  private readonly validationTick = signal(0);
 
-  get inputId(): string {
-    return this.name || 'app-input';
-  }
+  readonly inputId = computed(() => this.name() || 'app-input');
 
-  get resolvedType(): AppInputType {
-    if (this.type !== 'password') {
-      return this.type;
+  readonly resolvedType = computed<AppInputType>(() => {
+    if (this.type() !== 'password') {
+      return this.type();
     }
 
-    return this.isPasswordVisible ? 'text' : 'password';
-  }
+    return this.isPasswordVisible() ? 'text' : 'password';
+  });
 
-  get toggleIcon(): AppIconName {
-    return this.isPasswordVisible ? 'eye-off' : 'eye';
-  }
+  readonly toggleIcon = computed<AppIconName>(() =>
+    this.isPasswordVisible() ? 'eye-off' : 'eye',
+  );
 
-  get toggleLabel(): string {
-    return this.isPasswordVisible ? 'Ocultar senha' : 'Mostrar senha';
-  }
+  readonly toggleLabel = computed(() =>
+    this.isPasswordVisible() ? 'Ocultar senha' : 'Mostrar senha',
+  );
 
-  get errorMessage(): string | null {
-    if (!this.control.touched || !this.control.errors) {
+  readonly errorMessage = computed(() => {
+    this.validationTick();
+    const control = this.control();
+
+    if (!control.touched || !control.errors) {
       return null;
     }
 
-    if (this.control.errors['required']) {
+    if (control.errors['required']) {
       return 'Campo obrigatório';
     }
 
-    if (this.control.errors['email']) {
+    if (control.errors['email']) {
       return 'Informe um email válido';
     }
 
-    if (this.control.errors['minlength']) {
-      const requiredLength = this.control.errors['minlength']
+    if (control.errors['minlength']) {
+      const requiredLength = control.errors['minlength']
         .requiredLength as number;
       return `Mínimo de ${requiredLength} caracteres`;
     }
 
-    if (this.control.errors['passwordsMismatch']) {
+    if (control.errors['passwordsMismatch']) {
       return 'As senhas não coincidem';
     }
 
     return 'Valor inválido';
+  });
+
+  constructor() {
+    effect((onCleanup) => {
+      const control = this.control();
+      const subscription = merge(control.statusChanges, control.events).subscribe(
+        () => this.validationTick.update((tick) => tick + 1),
+      );
+
+      onCleanup(() => subscription.unsubscribe());
+    });
   }
 
   togglePasswordVisibility(): void {
-    if (this.type !== 'password') {
+    if (this.type() !== 'password') {
       return;
     }
 
-    this.isPasswordVisible = !this.isPasswordVisible;
+    this.isPasswordVisible.update((visible) => !visible);
   }
 }

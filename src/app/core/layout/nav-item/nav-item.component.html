@@ -1,0 +1,11 @@
+<a
+  class="nav-item"
+  [routerLink]="item().path"
+  routerLinkActive="nav-item--active"
+>
+  <app-icon class="nav-item__icon" [name]="item().icon" [size]="18"></app-icon>
+  <span class="nav-item__label">{{ item().label }}</span>
+  @if (badge(); as count) {
+    <span class="nav-item__badge">{{ count }}</span>
+  }
+</a>
